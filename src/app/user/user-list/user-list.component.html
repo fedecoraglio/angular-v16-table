@@ -1,0 +1,29 @@
+<div class="flex flex-col items-center w-full pb-10">
+    <span class="text-2xl pb-8">Users</span>
+    <table class="w-11/12">
+        <thead>
+            <tr class="border-b-2 border-white text-left">
+                <th class="text-left">Foto</th>
+                <th (click)="orderBy(firstName)">Name</th>
+                <th (click)="orderBy(lastName)">Apellido</th>
+                <th (click)="orderBy(country)">Pais</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="userResult$ | async">
+                <tr class="border-t-2 border-white text-left" *ngFor="let user of (userResult$ | async)">
+                    <td>
+                        <img [src]="user.picture.thumbnail" alt="Foto" />
+                    </td>
+                    <td>{{user.name.first}}</td>
+                    <td>{{user.name.last}}</td>
+                    <td>{{user.location.country}}</td>
+                    <td>
+                        <button type="button" (click)="deleteUser(user.email)">Eliminar</button>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
